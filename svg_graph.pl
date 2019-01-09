@@ -2,21 +2,13 @@
 # -*- cperl -*-
 
 use HTML::Entities;
-my $eltnum = "00001";
+use Math::Tau; # Needed for pie charts.
+my $eltnum = "00001"; # This exists to be incremented for each element to ensure unique id attributes.
 
 sub linegraph {
   my %arg = @_;
   my @elt;
-  my @defaultcolor = default_colors();
-  # Backdrop:
-  my $bdnum = $eltnum++;
-  push @elt, rect( x           => 12.5,
-                   y           => 12.5,
-                   width       => 965,
-                   height      => 725,
-                   fillcolor   => ($arg{backgroundcolor} || "#dfdfdf"),
-                   opacity     => '0.5',
-                   borderwidth => 2, );
+  push @elt, backdrop(%arg);
   my ($max, $hcnt) = (0,0); {
     for my $d (@{$arg{data}}) {
       my @val = @{$$d{values}};
@@ -36,34 +28,7 @@ sub linegraph {
     if ($max > 250000) { while ($max % 500000) { $max += 50000;  }}
     # TODO: support logarithmic scale.
   }
-  # Make sure all the data series have names, colors, legend positions:
-  my $dnum = 0;
-  for my $d (@{$arg{data}}) {
-    $dnum++;
-    if (not $$d{color}) { $$d{color} = shift @defaultcolor; }
-    if (not $$d{name})  { $$d{name}  = "Series " . $dnum;   }
-    $$d{__LEGEND_POS__} = $dnum;
-  }
-  if (not $arg{hidelegend}) {
-    my $lheight = 10 + (35 * (scalar @{$arg{data}}));
-    push @elt, rect( width       => 100,
-                     height      => $lheight,
-                     x           => 850,
-                     y           => (350 - $lheight / 2),
-                     opacity     => $arg{legendopacity} || 0.75,
-                     fillcolor   => ($arg{legendbackground} || '#eeeeee'),
-                     borderwidth => $arg{legendborderwidth} || 3,
-                   );
-    for my $d (@{$arg{data}}) {
-      my $y = (350 - $lheight / 2) + 30 * $$d{__LEGEND_POS__};
-      push @elt, line( color     => $$d{color},
-                       width     => 3,
-                       points    => [[855, $y], [865, $y]],);
-      push @elt, text( x         => 870,
-                       y         => $y + 4,
-                       text      => $$d{name});
-    }
-  }
+  push @elt, $_ for legend('line', %arg);
   # Now the grid:
   if (not $arg{hidegrid}) {
     my $v = 0;
@@ -116,23 +81,99 @@ sub linegraph {
                      width  => 5,
                      points => \@point );
   }
-  if ($arg{title}) {
-    push @elt, text(text  => $arg{title},
-                    align => 'center',
-                    font  => 'Georgia',
-                    size  => 78,
-                    x     => 494,
-                    y     => 100);
-  }
-  if ($arg{subtitle}) {
-    push @elt, text(text   => $arg{subtitle},
-                    align  => 'center',
-                    font   => 'Georgia',
-                    size   => 31,
-                    x      => 495,
-                    y      => 145,);
-  }
+  push @elt, title(%arg);
+  push @elt, subtitle(%arg);
   return @elt;
+}
+
+sub piechart {
+  my %arg = @_;
+  my @elt;
+  push @elt, backdrop(%arg);
+  push @elt, legend('rect', %arg);
+  my $total = 0; for my $d (@{$arg{data}}) {
+    $total += $$d{value};
+  }
+  push @elt, qq[<!-- total value of pie is $total -->];
+  my $theta = $arg{startangle} || 0;
+  for my $d (@{$arg{data}}) {
+    my $deltatheta = 360 * $$d{value} / $total;
+    push @elt, pieslice($d, $theta % 360, ($theta + $deltatheta) % 360);
+    $theta += $deltatheta;
+  }
+  push @elt, title(%arg);
+  push @elt, subtitle(%arg);
+  return @elt;
+}
+
+sub legend {
+  my ($legendtype, %arg) = @_;
+  my @elt = (qq[<!-- *** *** *** ***  L E G E N D  *** *** *** *** -->\n]);
+  # Make sure all the data series have names, colors, legend positions:
+  my @defaultcolor = default_colors();
+  my $dnum = 0;
+  for my $d (@{$arg{data}}) {
+    $dnum++;
+    if (not $$d{color}) { $$d{color} = shift @defaultcolor; }
+    if (not $$d{name})  { $$d{name}  = "Series " . $dnum;   }
+    $$d{__LEGEND_POS__} = $dnum;
+  }
+  if ($arg{hidelegend}) {
+    return (qq[<!-- no legend -->]);
+  } else {
+    my $lheight = 10 + (35 * (scalar @{$arg{data}}));
+    push @elt, rect( width       => 100,
+                     height      => $lheight,
+                     x           => 850,
+                     y           => (350 - $lheight / 2),
+                     opacity     => $arg{legendopacity} || 0.75,
+                     fillcolor   => ($arg{legendbackground} || '#eeeeee'),
+                     borderwidth => $arg{legendborderwidth} || 3,
+                   );
+    for my $d (@{$arg{data}}) {
+      my $y = (350 - $lheight / 2) + 30 * $$d{__LEGEND_POS__};
+      if ($legendtype eq 'line') {
+        push @elt, line( color     => $$d{color},
+                         width     => 3,
+                         points    => [[855, $y], [865, $y]],);
+      } else {
+        push @elt, rect( fillcolor   => $$d{color},
+                         borderwidth => 1,
+                         x           => 857,
+                         y           => $y - 4,
+                         width       => 8,
+                         height      => 8,
+                       );
+      }
+      push @elt, text( x         => 870,
+                       y         => $y + 4,
+                       text      => $$d{name});
+    }
+  }
+  push @elt, qq[<!-- *** *** ***  E N D   L E G E N D  *** *** *** -->\n];
+  return @elt;
+}
+
+sub subtitle {
+  my %arg = @_;
+  return $arg{subtitle} ? text(text   => $arg{subtitle},
+                               align  => 'center',
+                               font   => 'Georgia',
+                               size   => 31,
+                               x      => 495,
+                               y      => 145,)
+    : qq[<!-- no subtitle -->\n];
+}
+
+sub title {
+  my %arg = @_;
+  return $arg{title} ? text(text  => $arg{title},
+                            align => 'center',
+                            font  => 'Georgia',
+                            size  => 78,
+                            x     => 494,
+                            y     => 100)
+    : "<!-- no title -->\n";
 }
 
 sub text {
@@ -160,6 +201,65 @@ sub text {
          y="$arg{y}">] . encode_entities($arg{text}) . qq[</tspan></text>];
 }
 
+sub pieslice {
+  my ($d, $startangle, $endangle) = @_;
+  # Note that pieslice takes startangle and endangle in degrees.
+  # We convert them here to radians.
+  return "<!-- pieslice for $$d{name}, value $$d{value}, color $$d{color}, from $startangle to $endangle -->",
+    arc( stroke      => 'none',
+         fillopacity => 1,
+         fillcolor   => $$d{color},
+         x           => 425,
+         y           => 435,
+         radius      => 275,
+         start       => $startangle * tau / 360,
+         end         => $endangle   * tau / 360,
+       );
+}
+
+sub arc {
+  my %arg = @_;
+  $arg{color}       ||= '#000000';
+  $arg{fillcolor}   ||= '#7f7f7f';
+  $arg{fillopacity} ||= 0;
+  $arg{stroke}      ||= $arg{color};
+  $arg{width}       ||= 1;
+  $arg{radius}      ||= 50;
+  $arg{xradius}     ||= $arg{radius};
+  $arg{yradius}     ||= $arg{radius};
+  $arg{start}         = 0 if not defined $arg{start};
+  $arg{end}           = 6.2831 if not defined $arg{end};
+  $arg{x}             = 100 if not defined $arg{x};
+  $arg{y}             = 100 if not defined $arg{y};
+  my $num = $eltnum++;
+  # TODO: support xradius/yradius here:
+  my ($xstart,$ystart) = polar_to_rectangular($arg{start}, $arg{radius});
+  my ($xend,$yend)     = polar_to_rectangular($arg{end}, $arg{radius});
+  $xstart += $arg{x}; $xend += $arg{x};
+  # Y coords are inverted (because they start at the top of the screen in SVG):
+  $ystart = $arg{y} - $ystart; $yend = $arg{y} - $yend;
+  my $largeflag = (($arg{start} > $arg{end}) or (($arg{end} - $arg{start}) > (tau / 2))) ? 1 : 0;
+  my $sweepflag = 0;
+  return qq[<path
+       sodipodi:type="arc"
+       style="color:$arg{color};fill:$arg{fillcolor};fill-opacity:$arg{fillopacity};fill-rule:nonzero;stroke:$arg{stroke};stroke-width:$arg{width};marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path$num"
+       sodipodi:cx="$arg{x}"
+       sodipodi:cy="$arg{y}"
+       sodipodi:rx="$arg{xradius}"
+       sodipodi:ry="$arg{yradius}"
+       d="m $xstart,$ystart A $arg{xradius},$arg{yradius} 0 $largeflag $sweepflag $xend,$yend L $arg{x},$arg{y} z"
+       sodipodi:start="$arg{start}"
+       sodipodi:end="$arg{end}" />];
+}
+
+sub polar_to_rectangular {
+  my ($theta, $radius) = @_;
+  my $x = $radius * cos($theta);
+  my $y = $radius * sin($theta);
+  return ($x, $y);
+}
+
 sub line {
   my %arg = @_;
   my $num = $eltnum++;
@@ -170,6 +270,18 @@ sub line {
        style="fill:none;stroke:$arg{color};stroke-width:$arg{width};stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:$arg{opacity};stroke-miterlimit:4;stroke-dasharray:none"
        d="M ] . (join " ", map { $$_[0] . "," . $$_[1] } @{$arg{points}}) . qq["
        id="path$num" />]
+}
+
+sub backdrop {
+  my %arg = @_;
+  my $bdnum = $eltnum++;
+  return rect( x           => 12.5,
+               y           => 12.5,
+               width       => 965,
+               height      => 725,
+               fillcolor   => ($arg{backgroundcolor} || "#dfdfdf"),
+               opacity     => '0.5',
+               borderwidth => 2, );
 }
 
 sub rect {

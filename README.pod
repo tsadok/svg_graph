@@ -1,0 +1,49 @@
+=encoding utf8
+
+=head1 NAME
+
+svg_graph.pl - Quick and easy SVG graph generation from Perl programs.
+
+=head1 SYNOPSIS
+
+B<do '/path/to/svg_graph.pl';>
+B<my $markup = svg(linegraph( title, "Example Graph",>
+B<                            data,  [ +{ name,   "Team One",>
+B<                                        values, [2 4 6 8 10], },>
+B<                                     +{ name.   "Team B",>
+B<                                        values, [1 2 4 8 16], }, ], ));>
+
+=head1 DESCRIPTION
+
+svg_graph.pl defines a set of functions that can be called to create SVG
+graph content from simple input.
+
+=head1 LINE GRAPHS
+
+The linegraph() function creates a simple line graph.  See example_1.pl
+for an example of how to use it.
+
+=head1 PIE CHARTS
+
+The piechart() function creates a simple pie chart.  See example_2.pl
+for an example of how to use it.
+
+=head1 AUTHOR
+
+Jonadab the Unsightly One perpetrated this mess.  Blame him.
+
+=head1 BUGS
+
+This code is in early development, so almost all the features are
+missing, and there are probably lots of bugs.  Fortunately, the source
+code is provided, so if you have problems you can probably figure them
+out and fix them on your own, assuming you are a Perl programmer.
+
+Reporting discovered bugs to the author is encouraged.  The fastest
+way to reach me is on the Freenode IRC network, where I normally go
+by B<jonadab> and tend to leave my client connected 24/7, so even if
+I am not actually online, you can leave me a /msg and I should get it
+the next time I am online, in most cases.
+
+
+

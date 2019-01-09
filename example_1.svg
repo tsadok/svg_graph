@@ -62,6 +62,8 @@
        height="725"
        x="12.5"
        y="12.5" />
+  <!-- *** *** *** ***  L E G E N D  *** *** *** *** -->
+
   <rect
        style="color:#000000;fill:#eeeeee;fill-opacity:0.75;fill-rule:nonzero;stroke:#000000;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;stroke-opacity:0.75;stroke-miterlimit:4;stroke-dasharray:none"
        id="rect00003"
@@ -114,6 +116,8 @@
          id="tspan3594-3"
          x="870"
          y="386.5">Green</tspan></text>
+  <!-- *** *** ***  E N D   L E G E N D  *** *** *** -->
+
   <path
        style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
        d="M 100,700 825,700"

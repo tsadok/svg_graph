@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created by svg_graph.pl -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="990"
+   height="765"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="New document 1">
+  <defs
+     id="defs4">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective10" />
+    <inkscape:perspective
+       id="perspective3604"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.69989734"
+     inkscape:cx="505.08813"
+     inkscape:cy="357.57471"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1191"
+     inkscape:window-height="946"
+     inkscape:window-x="47"
+     inkscape:window-y="8"
+     inkscape:window-maximized="0" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+  <rect
+       style="color:#000000;fill:#dfdfdf;fill-opacity:0.5;fill-rule:nonzero;stroke:#000000;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;stroke-opacity:0.5;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect00002"
+       width="965"
+       height="725"
+       x="12.5"
+       y="12.5" />
+  <!-- *** *** *** ***  L E G E N D  *** *** *** *** -->
+
+  <rect
+       style="color:#000000;fill:#eeeeee;fill-opacity:0.75;fill-rule:nonzero;stroke:#000000;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;stroke-opacity:0.75;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect00003"
+       width="100"
+       height="115"
+       x="850"
+       y="292.5" />
+  <rect
+       style="color:#000000;fill:#cc0000;fill-opacity:1.0;fill-rule:nonzero;stroke:#000000;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;stroke-opacity:1.0;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect00004"
+       width="8"
+       height="8"
+       x="857"
+       y="318.5" />
+  <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:left;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans Mono;-inkscape-font-specification:Bitstream Vera Sans Mono"
+       x="870"
+       y="326.5"
+       id="text00005"
+       sodipodi:linespacing="100%"><tspan
+         sodipodi:role="line"
+         id="tspan3594-3"
+         x="870"
+         y="326.5">Weeks</tspan></text>
+  <rect
+       style="color:#000000;fill:#00aa00;fill-opacity:1.0;fill-rule:nonzero;stroke:#000000;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;stroke-opacity:1.0;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect00006"
+       width="8"
+       height="8"
+       x="857"
+       y="348.5" />
+  <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:left;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans Mono;-inkscape-font-specification:Bitstream Vera Sans Mono"
+       x="870"
+       y="356.5"
+       id="text00007"
+       sodipodi:linespacing="100%"><tspan
+         sodipodi:role="line"
+         id="tspan3594-3"
+         x="870"
+         y="356.5">Months</tspan></text>
+  <rect
+       style="color:#000000;fill:#000099;fill-opacity:1.0;fill-rule:nonzero;stroke:#000000;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;stroke-opacity:1.0;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect00008"
+       width="8"
+       height="8"
+       x="857"
+       y="378.5" />
+  <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:left;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans Mono;-inkscape-font-specification:Bitstream Vera Sans Mono"
+       x="870"
+       y="386.5"
+       id="text00009"
+       sodipodi:linespacing="100%"><tspan
+         sodipodi:role="line"
+         id="tspan3594-3"
+         x="870"
+         y="386.5">Days</tspan></text>
+  <!-- *** *** ***  E N D   L E G E N D  *** *** *** -->
+
+  <!-- total value of pie is 1482 -->
+  <!-- pieslice for Weeks, value 180, color #cc0000, from 90 to 133 -->
+  <path
+       sodipodi:type="arc"
+       style="color:#000000;fill:#cc0000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path00010"
+       sodipodi:cx="425"
+       sodipodi:cy="435"
+       sodipodi:rx="275"
+       sodipodi:ry="275"
+       d="m 425,160 A 275,275 0 0 0 237.450450982813,233.877732054728 L 425,435 z"
+       sodipodi:start="1.5707963267949"
+       sodipodi:end="2.32128790515246" />
+  <!-- pieslice for Months, value 42, color #00aa00, from 133 to 143 -->
+  <path
+       sodipodi:type="arc"
+       style="color:#000000;fill:#00aa00;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path00011"
+       sodipodi:cx="425"
+       sodipodi:cy="435"
+       sodipodi:rx="275"
+       sodipodi:ry="275"
+       d="m 237.450450982813,233.877732054728 A 275,275 0 0 0 205.375234736994,269.500868633187 L 425,435 z"
+       sodipodi:start="2.32128790515246"
+       sodipodi:end="2.49582083035189" />
+  <!-- pieslice for Days, value 1260, color #000099, from 143 to 90 -->
+  <path
+       sodipodi:type="arc"
+       style="color:#000000;fill:#000099;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path00012"
+       sodipodi:cx="425"
+       sodipodi:cy="435"
+       sodipodi:rx="275"
+       sodipodi:ry="275"
+       d="m 205.375234736994,269.500868633187 A 275,275 0 1 0 425,160 L 425,435 z"
+       sodipodi:start="2.49582083035189"
+       sodipodi:end="1.5707963267949" />
+  <text
+       xml:space="preserve"
+       style="font-size:78px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:100%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Georgia;-inkscape-font-specification:Georgia"
+       x="494"
+       y="100"
+       id="text00013"
+       sodipodi:linespacing="100%"><tspan
+         sodipodi:role="line"
+         id="tspan3594-3"
+         x="494"
+         y="100">Sample Pie Chart</tspan></text>
+  <text
+       xml:space="preserve"
+       style="font-size:31px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:100%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Georgia;-inkscape-font-specification:Georgia"
+       x="495"
+       y="145"
+       id="text00014"
+       sodipodi:linespacing="100%"><tspan
+         sodipodi:role="line"
+         id="tspan3594-3"
+         x="495"
+         y="145">https://github.com/tsadok/svg_graph.git</tspan></text>
+  </g>
+</svg>
