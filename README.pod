@@ -6,12 +6,13 @@ svg_graph.pl - Quick and easy SVG graph generation from Perl programs.
 
 =head1 SYNOPSIS
 
-B<do '/path/to/svg_graph.pl';>
-B<my $markup = svg(linegraph( title, "Example Graph",>
-B<                            data,  [ +{ name,   "Team One",>
-B<                                        values, [2 4 6 8 10], },>
-B<                                     +{ name.   "Team B",>
-B<                                        values, [1 2 4 8 16], }, ], ));>
+do '/path/to/svg_graph.pl';
+
+my $markup = svg(linegraph( title E<61>E<gt> "Example Graph",
+                            data  E<61>E<gt> [ +{ name E<61>E<gt>  "Team One",
+                                         values E<61>E<gt> [2 4 6 8 10], },
+                                      +{ name   E<61>E<gt> "Team B",
+                                         values E<61>E<gt> [1 2 4 8 16], }, ], ));
 
 =head1 DESCRIPTION
 
