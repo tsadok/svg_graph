@@ -5,18 +5,19 @@ do './svg_graph.pl';
 
 open SVG, ">", "example_1.svg";
 print SVG svg(linegraph( title    => "Sample Line Graph",
-                         subtitle => 'http://www.github.com/tsadok/svg_graph.git',
+                         subtitle => 'https://github.com/tsadok/svg_graph.git',
+                         xlabels  => [ qw(Monday Tuesday Wednesday Thursday Friday Saturday) ],
                          data     => [ +{ name   => "Red",
                                           color  => "#ee0000",
-                                          values => [17, 22, 27, 24, 25 ],
+                                          values => [17135, 22356, 27819, 24310, 25714 ],
                                         },
                                        +{ name   => "Blue",
                                           color  => '#4499ff',
-                                          values => [13, 16, 22, 25, 28 ],
+                                          values => [13819, 16124, 22684, 25319, 28174 ],
                                         },
                                        +{ name   => 'Green',
                                           color  => '#00aa00',
-                                          values => [20, 22, 21, 23, 22 ],
+                                          values => [20316, 22654, 21819, 23124, 22188 ],
                                         },
                                      ],
                        ));

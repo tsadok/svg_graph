@@ -27,11 +27,13 @@ sub linegraph {
     # We want to round the max up a bit, so none of the lines quite
     # hit the top of the chart, and so the scale looks reasonable.
     $max = int($max + 1.99999);
-    while ($max % 5) { $max++; }
-    if ($max > 15 )  { while ($max %  25)  { $max += 5;    }}
-    if ($max > 70 )  { while ($max % 100)  { $max += 25;   }}
-    if ($max > 300 ) { while ($max % 500)  { $max += 100;  }}
-    if ($max > 3000) { while ($max % 5000) { $max += 1000; }}
+    while ($max % 5)   { $max++; print "."; }
+    if ($max > 15 )    { while ($max % 25)     { $max += 5;      }}
+    if ($max > 70 )    { while ($max % 100)    { $max += 25;     }}
+    if ($max > 250 )   { while ($max % 500)    { $max += 100;    }}
+    if ($max > 2500)   { while ($max % 5000)   { $max += 500;    }}
+    if ($max > 25000)  { while ($max % 50000)  { $max += 5000;   }}
+    if ($max > 250000) { while ($max % 500000) { $max += 50000;  }}
     # TODO: support logarithmic scale.
   }
   # Make sure all the data series have names, colors, legend positions:
@@ -68,15 +70,37 @@ sub linegraph {
     while ($v < $max) {
       my $y = 700 - ($v / $max * 600);
       push @elt, line(color  => (($v == 0) ? '#000000' : '#666666'),
+                      width  => (($v == 0) ? 2 : 1),
                       points => [[100, $y], [825, $y]]);
-      push @elt, text(text  => $v,
+      my $label = ($max > 5000000) ? (int($v / 1000000) . " M") :
+        ($max > 5000) ? (int($v / 1000) . " k") : $v;
+      push @elt, text(text  => $label,
                       size  => 10,
                       align => 'right',
                       x     => 95,
                       y     => 2 + $y,
                      );
-      $v += ($max > 3000) ? 1000 : ($max > 700) ? 250 : ($max > 300) ? 100 :
+      $v += ($max > 7000000) ? 1000000 : ($max > 2500000) ? 500000 : ($max > 800000) ? 250000 :
+        ($max > 450000) ? 100000 : ($max > 250000) ? 50000 : ($max > 80000) ? 25000 :
+        ($max > 35000) ? 10000 : ($max > 19000) ? 5000 : ($max > 8000) ? 2500 :
+        ($max > 3000) ? 1000 : ($max > 700) ? 250 : ($max > 300) ? 100 :
         ($max > 70) ? 25 : ($max > 30) ? 10 : ($max > 15) ? 5 : 1;
+    }
+    $v = 0;
+    while ($v <= $hcnt) {
+      my $x = 100 + ($v / ($hcnt - 1) * 725);
+      my $top = ($arg{hideverticals} and ($v > 0)) ? 685 :
+        $arg{subtitle} ? 160 : $arg{title} ? 135 : 100;
+      push @elt, line( color  => (($v == 0) ? '#000000' : '#666666'),
+                       width  => (($v == 0) ? 2 : 1),
+                       points => [[$x, $top], [$x, 705]]);
+      push @elt, text( text  => (($arg{xlabels} and ($v <= scalar @{$arg{xlabels}})) ? $arg{xlabels}[$v] : $v),
+                       size  => 10,
+                       align => 'center',
+                       x     => $x,
+                       y     => 715,);
+      $v += ($hcnt > 1000) ? 250 : ($hcnt > 500) ? 100 : ($hcnt > 150) ? 25 :
+        ($hcnt > 45) ? 10 : ($hcnt > 18) ? 5 : 1;
     }
   }
   # Now the actual lines:
