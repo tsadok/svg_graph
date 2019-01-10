@@ -91,6 +91,16 @@ sub piechart {
   my @elt;
   push @elt, backdrop(%arg);
   push @elt, legend('rect', %arg);
+  if ($arg{bordercolor}) {
+    my $opacity = (defined $arg{borderopacity}) ? $arg{borderopacity} : 1;
+    my $radius  = 275 + ($arg{borderwidth} || 7);
+    push @elt, circle( fillopacity => $opacity,
+                       fillcolor   => $arg{bordercolor},
+                       stroke      => 'none',
+                       x           => 425,
+                       y           => 435,
+                       radius      => $radius, );
+  }
   my $total = 0; for my $d (@{$arg{data}}) {
     $total += $$d{value};
   }
@@ -217,6 +227,10 @@ sub pieslice {
        );
 }
 
+sub circle {
+  return arc(start => 0, end => tau, @_);
+}
+
 sub arc {
   my %arg = @_;
   $arg{color}       ||= '#000000';
@@ -228,7 +242,7 @@ sub arc {
   $arg{xradius}     ||= $arg{radius};
   $arg{yradius}     ||= $arg{radius};
   $arg{start}         = 0 if not defined $arg{start};
-  $arg{end}           = 6.2831 if not defined $arg{end};
+  $arg{end}           = tau if not defined $arg{end};
   $arg{x}             = 100 if not defined $arg{x};
   $arg{y}             = 100 if not defined $arg{y};
   my $num = $eltnum++;
@@ -238,8 +252,17 @@ sub arc {
   $xstart += $arg{x}; $xend += $arg{x};
   # Y coords are inverted (because they start at the top of the screen in SVG):
   $ystart = $arg{y} - $ystart; $yend = $arg{y} - $yend;
-  my $largeflag = (($arg{start} > $arg{end}) or (($arg{end} - $arg{start}) > (tau / 2))) ? 1 : 0;
-  my $sweepflag = 0;
+  my $largeflag  = (($arg{start} > $arg{end}) or (($arg{end} - $arg{start}) > (tau / 2))) ? 1 : 0;
+  my $epsilon    = $arg{epsilon} || 0.0000001;
+  my $fullcircle = ((abs($arg{start}) > $epsilon) or
+                    (abs($arg{end} - tau) > $epsilon)) ? 0 : 1;
+  my $sweepflag = $fullcircle ? 1 : 0;
+  my $arcto = qq[A $arg{xradius},$arg{yradius} 0 $largeflag $sweepflag ];
+  my $path = qq[m $xstart,$ystart $arcto]
+    . ($fullcircle # Use four easily-calculated points to define a complete circle:
+       ? (qq[ $arg{x},] . ($arg{y} - $arg{yradius}) . $arcto . ($arg{x} - $arg{xradius}) . qq[,$arg{y} ]
+          . qq[$arcto $arg{x},] . ($arg{y} + $arg{yradius}) . qq[ $arcto $xstart,$ystart])
+       : qq[ $xend,$yend L $arg{x},$arg{y}]) . ' z';
   return qq[<path
        sodipodi:type="arc"
        style="color:$arg{color};fill:$arg{fillcolor};fill-opacity:$arg{fillopacity};fill-rule:nonzero;stroke:$arg{stroke};stroke-width:$arg{width};marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
@@ -248,7 +271,7 @@ sub arc {
        sodipodi:cy="$arg{y}"
        sodipodi:rx="$arg{xradius}"
        sodipodi:ry="$arg{yradius}"
-       d="m $xstart,$ystart A $arg{xradius},$arg{yradius} 0 $largeflag $sweepflag $xend,$yend L $arg{x},$arg{y} z"
+       d="$path"
        sodipodi:start="$arg{start}"
        sodipodi:end="$arg{end}" />];
 }

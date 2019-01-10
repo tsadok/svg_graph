@@ -127,41 +127,52 @@
          y="386.5">Days</tspan></text>
   <!-- *** *** ***  E N D   L E G E N D  *** *** *** -->
 
+  <path
+       sodipodi:type="arc"
+       style="color:#000000;fill:#444444;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path00010"
+       sodipodi:cx="425"
+       sodipodi:cy="435"
+       sodipodi:rx="282"
+       sodipodi:ry="282"
+       d="m 707,435 A 282,282 0 1 1  425,153A 282,282 0 1 1 143,435 A 282,282 0 1 1  425,717 A 282,282 0 1 1  707,435 z"
+       sodipodi:start="0"
+       sodipodi:end="6.28318530717959" />
   <!-- total value of pie is 1482 -->
   <!-- pieslice for Weeks, value 180, color #cc0000, from 90 to 133 -->
   <path
        sodipodi:type="arc"
        style="color:#000000;fill:#cc0000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="path00010"
+       id="path00011"
        sodipodi:cx="425"
        sodipodi:cy="435"
        sodipodi:rx="275"
        sodipodi:ry="275"
-       d="m 425,160 A 275,275 0 0 0 237.450450982813,233.877732054728 L 425,435 z"
+       d="m 425,160 A 275,275 0 0 0  237.450450982813,233.877732054728 L 425,435 z"
        sodipodi:start="1.5707963267949"
        sodipodi:end="2.32128790515246" />
   <!-- pieslice for Months, value 42, color #00aa00, from 133 to 143 -->
   <path
        sodipodi:type="arc"
        style="color:#000000;fill:#00aa00;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="path00011"
+       id="path00012"
        sodipodi:cx="425"
        sodipodi:cy="435"
        sodipodi:rx="275"
        sodipodi:ry="275"
-       d="m 237.450450982813,233.877732054728 A 275,275 0 0 0 205.375234736994,269.500868633187 L 425,435 z"
+       d="m 237.450450982813,233.877732054728 A 275,275 0 0 0  205.375234736994,269.500868633187 L 425,435 z"
        sodipodi:start="2.32128790515246"
        sodipodi:end="2.49582083035189" />
   <!-- pieslice for Days, value 1260, color #000099, from 143 to 90 -->
   <path
        sodipodi:type="arc"
        style="color:#000000;fill:#000099;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="path00012"
+       id="path00013"
        sodipodi:cx="425"
        sodipodi:cy="435"
        sodipodi:rx="275"
        sodipodi:ry="275"
-       d="m 205.375234736994,269.500868633187 A 275,275 0 1 0 425,160 L 425,435 z"
+       d="m 205.375234736994,269.500868633187 A 275,275 0 1 0  425,160 L 425,435 z"
        sodipodi:start="2.49582083035189"
        sodipodi:end="1.5707963267949" />
   <text
@@ -169,7 +180,7 @@
        style="font-size:78px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:100%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Georgia;-inkscape-font-specification:Georgia"
        x="494"
        y="100"
-       id="text00013"
+       id="text00014"
        sodipodi:linespacing="100%"><tspan
          sodipodi:role="line"
          id="tspan3594-3"
@@ -180,7 +191,7 @@
        style="font-size:31px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:100%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Georgia;-inkscape-font-specification:Georgia"
        x="495"
        y="145"
-       id="text00014"
+       id="text00015"
        sodipodi:linespacing="100%"><tspan
          sodipodi:role="line"
          id="tspan3594-3"
