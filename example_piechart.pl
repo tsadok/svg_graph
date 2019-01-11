@@ -3,7 +3,7 @@
 
 do './svg_graph.pl';
 
-open SVG, ">", "example_2.svg";
+open SVG, ">", "example_piechart.svg";
 print SVG svg(piechart( title       => "Sample Pie Chart",
                         subtitle    => 'https://github.com/tsadok/svg_graph.git',
                         bordercolor => '#444444',

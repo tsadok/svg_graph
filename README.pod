@@ -19,15 +19,20 @@ my $markup = svg(linegraph( title E<61>E<gt> "Example Graph",
 svg_graph.pl defines a set of functions that can be called to create SVG
 graph content from simple input.
 
-=head1 LINE GRAPHS
+=head2 LINE GRAPHS
 
-The linegraph() function creates a simple line graph.  See example_1.pl
-for an example of how to use it.
+The linegraph() function creates a simple line graph.
+See example_linegraph.pl for an example of how to use it.
 
-=head1 PIE CHARTS
+=head2 BAR GRAPHS
 
-The piechart() function creates a simple pie chart.  See example_2.pl
-for an example of how to use it.
+The bargraph() function creates a simple bar graph.
+See example_bargraph.pl for an example of how to use it.
+
+=head2 PIE CHARTS
+
+The piechart() function creates a simple pie chart.
+See example_piechart.pl for an example of how to use it.
 
 =head1 AUTHOR
 

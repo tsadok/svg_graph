@@ -1,6 +1,7 @@
 #!/usr/bin/perl
 # -*- cperl -*-
 
+use strict;
 use HTML::Entities;
 use Math::Tau; # Needed for pie charts.
 my $eltnum = "00001"; # This exists to be incremented for each element to ensure unique id attributes.
@@ -9,65 +10,9 @@ sub linegraph {
   my %arg = @_;
   my @elt;
   push @elt, backdrop(%arg);
-  my ($max, $hcnt) = (0,0); {
-    for my $d (@{$arg{data}}) {
-      my @val = @{$$d{values}};
-      $hcnt = scalar @val if $hcnt < scalar @val;
-      for my $v (@val) {
-        $max = $v if $max < $v;
-      }}
-    # We want to round the max up a bit, so none of the lines quite
-    # hit the top of the chart, and so the scale looks reasonable.
-    $max = int($max + 1.99999);
-    while ($max % 5)   { $max++; print "."; }
-    if ($max > 15 )    { while ($max % 25)     { $max += 5;      }}
-    if ($max > 70 )    { while ($max % 100)    { $max += 25;     }}
-    if ($max > 250 )   { while ($max % 500)    { $max += 100;    }}
-    if ($max > 2500)   { while ($max % 5000)   { $max += 500;    }}
-    if ($max > 25000)  { while ($max % 50000)  { $max += 5000;   }}
-    if ($max > 250000) { while ($max % 500000) { $max += 50000;  }}
-    # TODO: support logarithmic scale.
-  }
+  my ($max, $hcnt) = get_maxima($arg{data}, %arg);
   push @elt, $_ for legend('line', %arg);
-  # Now the grid:
-  if (not $arg{hidegrid}) {
-    my $v = 0;
-    while ($v < $max) {
-      my $y = 700 - ($v / $max * 600);
-      push @elt, line(color  => (($v == 0) ? '#000000' : '#666666'),
-                      width  => (($v == 0) ? 2 : 1),
-                      points => [[100, $y], [825, $y]]);
-      my $label = ($max > 5000000) ? (int($v / 1000000) . " M") :
-        ($max > 5000) ? (int($v / 1000) . " k") : $v;
-      push @elt, text(text  => $label,
-                      size  => 10,
-                      align => 'right',
-                      x     => 95,
-                      y     => 2 + $y,
-                     );
-      $v += ($max > 7000000) ? 1000000 : ($max > 2500000) ? 500000 : ($max > 800000) ? 250000 :
-        ($max > 450000) ? 100000 : ($max > 250000) ? 50000 : ($max > 80000) ? 25000 :
-        ($max > 35000) ? 10000 : ($max > 19000) ? 5000 : ($max > 8000) ? 2500 :
-        ($max > 3000) ? 1000 : ($max > 700) ? 250 : ($max > 300) ? 100 :
-        ($max > 70) ? 25 : ($max > 30) ? 10 : ($max > 15) ? 5 : 1;
-    }
-    $v = 0;
-    while ($v <= $hcnt) {
-      my $x = 100 + ($v / ($hcnt - 1) * 725);
-      my $top = ($arg{hideverticals} and ($v > 0)) ? 685 :
-        $arg{subtitle} ? 160 : $arg{title} ? 135 : 100;
-      push @elt, line( color  => (($v == 0) ? '#000000' : '#666666'),
-                       width  => (($v == 0) ? 2 : 1),
-                       points => [[$x, $top], [$x, 705]]);
-      push @elt, text( text  => (($arg{xlabels} and ($v <= scalar @{$arg{xlabels}})) ? $arg{xlabels}[$v] : $v),
-                       size  => 10,
-                       align => 'center',
-                       x     => $x,
-                       y     => 715,);
-      $v += ($hcnt > 1000) ? 250 : ($hcnt > 500) ? 100 : ($hcnt > 150) ? 25 :
-        ($hcnt > 45) ? 10 : ($hcnt > 18) ? 5 : 1;
-    }
-  }
+  push @elt, $_ for grid($max, $hcnt, $arg{data}, %arg);
   # Now the actual lines:
   for my $d (@{$arg{data}}) {
     my $n = 0;
@@ -81,6 +26,59 @@ sub linegraph {
                      width  => 5,
                      points => \@point );
   }
+  # And finally do the title(s), if applicable:
+  push @elt, title(%arg);
+  push @elt, subtitle(%arg);
+  return @elt;
+}
+
+sub bargraph {
+  my %arg = @_;
+  $arg{barborderopacity} = 1 if not defined $arg{barborderopacity}; # Allow explicit 0 but default to 1.
+  $arg{baropacity}       = 1 if not defined $arg{baropacity};       # Ditto.
+  # But note that barborderwidth defaults to 0, making the opacities irrelevant by default.
+  # With this setup, calling code can just specify barborderwidth and get visible borders.
+  my @elt;
+  my ($max, $hcnt) = get_maxima($arg{data}, %arg);
+  my $maxbars  = @{$arg{data}};
+  my $hwidth   = 725 / $hcnt;
+  my $barspace = $hwidth / ($maxbars + 1);
+  my $padding  = $barspace / 2;
+  my $barpad   = $arg{barpadding} || 0;
+  my $barwidth = $barspace - (2 * $barpad);
+  # Draw the preliminaries:
+  push @elt, backdrop(%arg);
+  push @elt, $_ for legend('rect', %arg);
+  push @elt, $_ for grid($max, $hcnt, $arg{data},
+                         hideverticals => 'hide',
+                         graphtype     => 'bargraph',
+                         xlabelpadding =>  $barspace * 2,
+                         %arg);
+  # Now draw the bars:
+  if ($barwidth <= 0) { warn "Bar padding is too large ($barpad), discarding it.";
+                        $barpad = 0; $barwidth = $barspace; }
+  my $barnum = 0;
+  for my $d (@{$arg{data}}) {
+    my $hnum = 0;
+    for my $v (@{$$d{values}}) {
+      my $hpos   = 100 + $hwidth * $hnum;
+      my $barpos = $hpos + $padding + ($barspace * $barnum);
+      my $height = $v / $max * 600;
+      push @elt, rect( fillcolor     => $$d{color},
+                       x             => $barpos + $barpad,
+                       width         => $barwidth,
+                       y             => 700 - $height,
+                       height        => $height,
+                       borderwidth   => $arg{barborderwidth} || 0,
+                       borderopacity => $arg{barborderopacity},
+                       bordercolor   => $$d{bordercolor} || $arg{bordercolor} || '#000000',
+                       opacity       => (defined $$d{opacity}) ? $$d{opacity} : $arg{baropacity},
+                     );
+      $hnum++;
+    }
+    $barnum++;
+  }
+  # And finally do the title(s), if applicable:
   push @elt, title(%arg);
   push @elt, subtitle(%arg);
   return @elt;
@@ -113,6 +111,81 @@ sub piechart {
   }
   push @elt, title(%arg);
   push @elt, subtitle(%arg);
+  return @elt;
+}
+
+sub get_maxima {
+  # Calculate the vertical and horizontal maxima for a data set.
+  my ($data, %arg) = @_;
+  my ($vmax, $hmax) = (0,0);
+  for my $d (@$data) {
+    my @val = @{$$d{values}};
+    $hmax = scalar @val if $hmax < scalar @val;
+    for my $v (@val) {
+      $vmax = $v if $vmax < $v;
+    }}
+  # We want to round the max up a bit, so none of the elements (lines,
+  # bars, whatever) quite hit the top of the chart, and so the scale
+  # looks reasonable.
+  $vmax = int($vmax + 1.99999);
+  while ($vmax % 5)   { $vmax++; }
+  if ($vmax > 15 )    { while ($vmax % 25)     { $vmax += 5;      }}
+  if ($vmax > 70 )    { while ($vmax % 100)    { $vmax += 25;     }}
+  if ($vmax > 250 )   { while ($vmax % 500)    { $vmax += 100;    }}
+  if ($vmax > 2500)   { while ($vmax % 5000)   { $vmax += 500;    }}
+  if ($vmax > 25000)  { while ($vmax % 50000)  { $vmax += 5000;   }}
+  if ($vmax > 250000) { while ($vmax % 500000) { $vmax += 50000;  }}
+  # TODO: support logarithmic scale.
+  return ($vmax, $hmax);
+}
+
+sub grid {
+  my ($vmax, $hmax, $data, %arg) = @_;
+  my @elt;
+  $arg{graphtype} ||= 'linegraph'; # The default grid type.  Should also work for area graphs.
+  # Horizontal grid lines:
+  my $v = 0;
+  while ($v < $vmax) {
+    my $y = 700 - ($v / $vmax * 600);
+    push @elt, line(color  => (($v == 0) ? '#000000' : '#666666'),
+                    width  => (($v == 0) ? 2 : 1),
+                    points => [[100, $y], [825, $y]])
+      if not $arg{hidegrid};
+    # And the labels:
+    my $label = ($vmax > 5000000) ? (int($v / 1000000) . " M") :
+      ($vmax > 5000) ? (int($v / 1000) . " k") : $v;
+    push @elt, text(text  => $label,
+                    size  => 10,
+                    align => 'right',
+                    x     => 95,
+                    y     => 2 + $y,
+                   );
+    $v += ($vmax > 7000000) ? 1000000 : ($vmax > 2500000) ? 500000 : ($vmax > 800000) ? 250000 :
+      ($vmax > 450000) ? 100000 : ($vmax > 250000) ? 50000 : ($vmax > 80000) ? 25000 :
+      ($vmax > 35000) ? 10000 : ($vmax > 19000) ? 5000 : ($vmax > 8000) ? 2500 :
+      ($vmax > 3000) ? 1000 : ($vmax > 700) ? 250 : ($vmax > 300) ? 100 :
+      ($vmax > 70) ? 25 : ($vmax > 30) ? 10 : ($vmax > 15) ? 5 : 1;
+  }
+  # Vertical grid lines:
+  $v = 0;
+  while ($v <= $hmax) {
+    my $x = 100 + ($arg{xlabelpadding} || 0) + ($v / ($hmax - (($arg{graphtype} eq 'bargraph') ? 0 : 1)) * 725);
+    my $top = ($arg{hideverticals} and ($v > 0)) ? 685 :
+      $arg{subtitle} ? 160 : $arg{title} ? 135 : 100;
+    push @elt, line( color  => (($v == 0) ? '#000000' : '#666666'),
+                     width  => (($v == 0) ? 2 : 1),
+                     points => [[$x, $top], [$x, 705]])
+      unless (($arg{hidegrid}) or
+              (($arg{hideverticals} || 'show') eq 'hide')); # 'partial' or 'stub' gives you just the stub.
+    # And the labels:
+    push @elt, text( text  => (($arg{xlabels} and ($v <= scalar @{$arg{xlabels}})) ? $arg{xlabels}[$v] : $v),
+                     size  => 10,
+                     align => 'center',
+                     x     => $x, # TODO: this is correct for linegraph, wrong for bargraph, fix it.
+                     y     => 715,);
+    $v += ($hmax > 1000) ? 250 : ($hmax > 500) ? 100 : ($hmax > 150) ? 25 :
+      ($hmax > 45) ? 10 : ($hmax > 18) ? 5 : 1;
+  }
   return @elt;
 }
 
@@ -311,10 +384,10 @@ sub rect {
   my %arg = @_;
   my $num = $eltnum++;
   $arg{bordercolor}   ||= '#000000';
-  $arg{borderwidth}   ||= '5';
   $arg{fillcolor}     ||= '#FF0000';
-  $arg{opacity}       ||= '1.0';
-  $arg{borderopacity} ||= $arg{opacity};
+  $arg{borderwidth}     = '5' if not defined $arg{borderwidth};             # Allow explicit 0
+  $arg{opacity}         = '1.0' if not defined $arg{opacity};               # Ditto
+  $arg{borderopacity}   = $arg{opacity} if not defined $arg{borderopacity}; # Ditto
   die "No x coordinate for rect()" if not $arg{x};
   die "No y coordinate for rect()" if not $arg{y};
   $arg{width}         ||= 50;

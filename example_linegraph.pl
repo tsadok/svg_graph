@@ -3,7 +3,7 @@
 
 do './svg_graph.pl';
 
-open SVG, ">", "example_1.svg";
+open SVG, ">", "example_linegraph.svg";
 print SVG svg(linegraph( title    => "Sample Line Graph",
                          subtitle => 'https://github.com/tsadok/svg_graph.git',
                          xlabels  => [ qw(Monday Tuesday Wednesday Thursday Friday Saturday) ],
