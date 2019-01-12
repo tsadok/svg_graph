@@ -222,7 +222,7 @@ sub grid {
   }
   # Vertical grid lines:
   $v = 0;
-  while ($v <= $hmax) {
+  while ($v < $hmax) {
     my $x = 100 + ($arg{xlabelpadding} || 0) + ($v / ($hmax - (($arg{graphtype} eq 'bargraph') ? 0 : 1)) * 725);
     my $top = ($arg{hideverticals} and ($v > 0)) ? 685 :
       $arg{subtitle} ? 160 : $arg{title} ? 135 : 100;

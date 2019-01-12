@@ -269,38 +269,23 @@
          x="825"
          y="715">Friday</tspan></text>
   <path
-       style="fill:none;stroke:#666666;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
-       d="M 1006.25,160 1006.25,705"
-       id="path00030" />
-  <text
-       xml:space="preserve"
-       style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:100%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans Mono;-inkscape-font-specification:Bitstream Vera Sans Mono"
-       x="1006.25"
-       y="715"
-       id="text00031"
-       sodipodi:linespacing="100%"><tspan
-         sodipodi:role="line"
-         id="tspan3594-3"
-         x="1006.25"
-         y="715">Saturday</tspan></text>
-  <path
        style="fill:none;stroke:#ee0000;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
        d="M 100,494.38 281.25,431.728 462.5,366.172 643.75,408.28 825,391.432"
-       id="path00032" />
+       id="path00030" />
   <path
        style="fill:none;stroke:#4499ff;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
        d="M 100,534.172 281.25,506.512 462.5,427.792 643.75,396.172 825,361.912"
-       id="path00033" />
+       id="path00031" />
   <path
        style="fill:none;stroke:#00aa00;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
        d="M 100,456.208 281.25,428.152 462.5,438.172 643.75,422.512 825,433.744"
-       id="path00034" />
+       id="path00032" />
   <text
        xml:space="preserve"
        style="font-size:78px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:100%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Georgia;-inkscape-font-specification:Georgia"
        x="494"
        y="100"
-       id="text00035"
+       id="text00033"
        sodipodi:linespacing="100%"><tspan
          sodipodi:role="line"
          id="tspan3594-3"
@@ -311,7 +296,7 @@
        style="font-size:31px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:100%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Georgia;-inkscape-font-specification:Georgia"
        x="495"
        y="145"
-       id="text00036"
+       id="text00034"
        sodipodi:linespacing="100%"><tspan
          sodipodi:role="line"
          id="tspan3594-3"
