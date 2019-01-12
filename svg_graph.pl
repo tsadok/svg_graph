@@ -6,6 +6,34 @@ use HTML::Entities;
 use Math::Tau; # Needed for pie charts.
 my $eltnum = "00001"; # This exists to be incremented for each element to ensure unique id attributes.
 
+sub areagraph {
+  my %arg = @_;
+  my (@elt, @area);
+  push @elt, backdrop(%arg);
+  my ($max, $hcnt) = get_maxima($arg{data}, stacked => 'yes', %arg);
+  push @elt, $_ for legend('rect', %arg);
+  push @elt, $_ for grid($max, $hcnt, $arg{data}, %arg);
+  my @runningtotal;
+  for my $d (@{$arg{data}}) {
+    my $n = 0;
+    my @point = map {
+      $runningtotal[$n] += $_;
+      my $x = 100 + ($n / ($hcnt - 1) * 725);
+      my $y = 700 - ($runningtotal[$n] / $max * 600);
+      $n++;
+      [$x, $y]
+    } @{$$d{values}};
+    unshift @area, line( color  => $$d{color},
+                         width  => 5,
+                         fill   => ($$d{fillcolor} || $$d{color}),
+                         points => [ [100, 700], @point, [825, 700] ] );
+  }
+  push @elt, $_ for @area;
+  push @elt, title(%arg);
+  push @elt, subtitle(%arg);
+  return @elt;
+}
+
 sub linegraph {
   my %arg = @_;
   my @elt;
@@ -114,9 +142,29 @@ sub piechart {
   return @elt;
 }
 
+sub get_stacked_maxima {
+  # Calculate the vertical and horizontal maxima and totals at each point,
+  # for the data set for a "stacked" graph (stacked bar, area, etc.).
+  my ($data, %arg) = @_;
+  my ($vmax, $hmax, @total) = (0,0);
+  for my $d (@$data) {
+    my @val = @{$$d{values}};
+    $hmax = scalar @val if $hmax < scalar @val;
+  }
+  for my $n (0 .. ($hmax - 1)) {
+    for my $d (@$data) {
+      $total[$n] += $$d{values}[$n];
+    }
+    $vmax = $total[$n] if $vmax < $total[$n];
+  }
+  $vmax = padmaximum($vmax);
+  return ($vmax, $hmax, \@total);
+}
+
 sub get_maxima {
   # Calculate the vertical and horizontal maxima for a data set.
   my ($data, %arg) = @_;
+  if ($arg{stacked}) { return get_stacked_maxima($data, %arg); }
   my ($vmax, $hmax) = (0,0);
   for my $d (@$data) {
     my @val = @{$$d{values}};
@@ -124,19 +172,25 @@ sub get_maxima {
     for my $v (@val) {
       $vmax = $v if $vmax < $v;
     }}
+  $vmax = padmaximum($vmax);
+  # TODO: support logarithmic scale.
+  return ($vmax, $hmax);
+}
+
+sub padmaximum {
+  my ($max) = @_;
   # We want to round the max up a bit, so none of the elements (lines,
   # bars, whatever) quite hit the top of the chart, and so the scale
   # looks reasonable.
-  $vmax = int($vmax + 1.99999);
-  while ($vmax % 5)   { $vmax++; }
-  if ($vmax > 15 )    { while ($vmax % 25)     { $vmax += 5;      }}
-  if ($vmax > 70 )    { while ($vmax % 100)    { $vmax += 25;     }}
-  if ($vmax > 250 )   { while ($vmax % 500)    { $vmax += 100;    }}
-  if ($vmax > 2500)   { while ($vmax % 5000)   { $vmax += 500;    }}
-  if ($vmax > 25000)  { while ($vmax % 50000)  { $vmax += 5000;   }}
-  if ($vmax > 250000) { while ($vmax % 500000) { $vmax += 50000;  }}
-  # TODO: support logarithmic scale.
-  return ($vmax, $hmax);
+  $max = int($max + 1.99999);
+  while ($max % 5)   { $max++; }
+  if ($max > 15 )    { while ($max % 25)     { $max += 5;      }}
+  if ($max > 70 )    { while ($max % 100)    { $max += 25;     }}
+  if ($max > 250 )   { while ($max % 500)    { $max += 100;    }}
+  if ($max > 2500)   { while ($max % 5000)   { $max += 500;    }}
+  if ($max > 25000)  { while ($max % 50000)  { $max += 5000;   }}
+  if ($max > 250000) { while ($max % 500000) { $max += 50000;  }}
+  return $max;
 }
 
 sub grid {
@@ -362,8 +416,9 @@ sub line {
   $arg{color}   ||= '#7f7f7f';
   $arg{width}   ||= 1;
   $arg{opacity} ||= 1;
+  $arg{fill}    ||= 'none';
   return qq[<path
-       style="fill:none;stroke:$arg{color};stroke-width:$arg{width};stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:$arg{opacity};stroke-miterlimit:4;stroke-dasharray:none"
+       style="fill:$arg{fill};stroke:$arg{color};stroke-width:$arg{width};stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:$arg{opacity};stroke-miterlimit:4;stroke-dasharray:none"
        d="M ] . (join " ", map { $$_[0] . "," . $$_[1] } @{$arg{points}}) . qq["
        id="path$num" />]
 }

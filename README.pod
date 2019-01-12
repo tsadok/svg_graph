@@ -34,6 +34,11 @@ See example_bargraph.pl for an example of how to use it.
 The piechart() function creates a simple pie chart.
 See example_piechart.pl for an example of how to use it.
 
+=head2 AREA GRAPHS
+
+The areagraph() function creates a simple area graph.
+See example_areagraph.pl for an example of how to use it.
+
 =head1 AUTHOR
 
 Jonadab the Unsightly One perpetrated this mess.  Blame him.
