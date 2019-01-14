@@ -72,7 +72,7 @@
        x="850"
        y="292.5" />
   <path
-       style="fill:none;stroke:#ee0000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       style="fill:none;stroke:#ee0000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;fill-opacity:1;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
        d="M 855,322.5 865,322.5"
        id="path00004" />
   <text
@@ -87,7 +87,7 @@
          x="870"
          y="326.5">Red</tspan></text>
   <path
-       style="fill:none;stroke:#4499ff;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       style="fill:none;stroke:#4499ff;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;fill-opacity:1;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
        d="M 855,352.5 865,352.5"
        id="path00006" />
   <text
@@ -102,7 +102,7 @@
          x="870"
          y="356.5">Blue</tspan></text>
   <path
-       style="fill:none;stroke:#00aa00;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       style="fill:none;stroke:#00aa00;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;fill-opacity:1;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
        d="M 855,382.5 865,382.5"
        id="path00008" />
   <text
@@ -118,83 +118,85 @@
          y="386.5">Green</tspan></text>
   <!-- *** *** ***  E N D   L E G E N D  *** *** *** -->
 
+  <!--  *** *** ***  S T A R T   G R I D  *** *** ***  -->
   <path
-       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
-       d="M 100,700 825,700"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;fill-opacity:1;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="M 95,700 825,700"
        id="path00010" />
   <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:right;line-height:100%;writing-mode:lr-tb;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans Mono;-inkscape-font-specification:Bitstream Vera Sans Mono"
-       x="95"
+       x="90"
        y="702"
        id="text00011"
        sodipodi:linespacing="100%"><tspan
          sodipodi:role="line"
          id="tspan3594-3"
-         x="95"
+         x="90"
          y="702">0 k</tspan></text>
   <path
-       style="fill:none;stroke:#666666;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
-       d="M 100,580 825,580"
+       style="fill:none;stroke:#666666;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;fill-opacity:1;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="M 95,580 825,580"
        id="path00012" />
   <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:right;line-height:100%;writing-mode:lr-tb;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans Mono;-inkscape-font-specification:Bitstream Vera Sans Mono"
-       x="95"
+       x="90"
        y="582"
        id="text00013"
        sodipodi:linespacing="100%"><tspan
          sodipodi:role="line"
          id="tspan3594-3"
-         x="95"
+         x="90"
          y="582">10 k</tspan></text>
   <path
-       style="fill:none;stroke:#666666;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
-       d="M 100,460 825,460"
+       style="fill:none;stroke:#666666;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;fill-opacity:1;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="M 95,460 825,460"
        id="path00014" />
   <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:right;line-height:100%;writing-mode:lr-tb;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans Mono;-inkscape-font-specification:Bitstream Vera Sans Mono"
-       x="95"
+       x="90"
        y="462"
        id="text00015"
        sodipodi:linespacing="100%"><tspan
          sodipodi:role="line"
          id="tspan3594-3"
-         x="95"
+         x="90"
          y="462">20 k</tspan></text>
   <path
-       style="fill:none;stroke:#666666;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
-       d="M 100,340 825,340"
+       style="fill:none;stroke:#666666;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;fill-opacity:1;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="M 95,340 825,340"
        id="path00016" />
   <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:right;line-height:100%;writing-mode:lr-tb;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans Mono;-inkscape-font-specification:Bitstream Vera Sans Mono"
-       x="95"
+       x="90"
        y="342"
        id="text00017"
        sodipodi:linespacing="100%"><tspan
          sodipodi:role="line"
          id="tspan3594-3"
-         x="95"
+         x="90"
          y="342">30 k</tspan></text>
   <path
-       style="fill:none;stroke:#666666;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
-       d="M 100,220 825,220"
+       style="fill:none;stroke:#666666;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;fill-opacity:1;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="M 95,220 825,220"
        id="path00018" />
   <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:right;line-height:100%;writing-mode:lr-tb;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans Mono;-inkscape-font-specification:Bitstream Vera Sans Mono"
-       x="95"
+       x="90"
        y="222"
        id="text00019"
        sodipodi:linespacing="100%"><tspan
          sodipodi:role="line"
          id="tspan3594-3"
-         x="95"
+         x="90"
          y="222">40 k</tspan></text>
+  <!--  *** *** ***  *** VERTICAL ***  *** *** ***  -->
   <path
-       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;fill-opacity:1;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
        d="M 100,160 100,705"
        id="path00020" />
   <text
@@ -209,7 +211,7 @@
          x="100"
          y="715">Monday</tspan></text>
   <path
-       style="fill:none;stroke:#666666;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       style="fill:none;stroke:#666666;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;fill-opacity:1;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
        d="M 281.25,160 281.25,705"
        id="path00022" />
   <text
@@ -224,7 +226,7 @@
          x="281.25"
          y="715">Tuesday</tspan></text>
   <path
-       style="fill:none;stroke:#666666;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       style="fill:none;stroke:#666666;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;fill-opacity:1;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
        d="M 462.5,160 462.5,705"
        id="path00024" />
   <text
@@ -239,7 +241,7 @@
          x="462.5"
          y="715">Wednesday</tspan></text>
   <path
-       style="fill:none;stroke:#666666;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       style="fill:none;stroke:#666666;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;fill-opacity:1;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
        d="M 643.75,160 643.75,705"
        id="path00026" />
   <text
@@ -254,7 +256,7 @@
          x="643.75"
          y="715">Thursday</tspan></text>
   <path
-       style="fill:none;stroke:#666666;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       style="fill:none;stroke:#666666;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;fill-opacity:1;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
        d="M 825,160 825,705"
        id="path00028" />
   <text
@@ -268,16 +270,17 @@
          id="tspan3594-3"
          x="825"
          y="715">Friday</tspan></text>
+  <!--  *** *** ***    E N D   G R I D    *** *** ***  -->
   <path
-       style="fill:none;stroke:#ee0000;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       style="fill:none;stroke:#ee0000;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;fill-opacity:1;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
        d="M 100,494.38 281.25,431.728 462.5,366.172 643.75,408.28 825,391.432"
        id="path00030" />
   <path
-       style="fill:none;stroke:#4499ff;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       style="fill:none;stroke:#4499ff;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;fill-opacity:1;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
        d="M 100,534.172 281.25,506.512 462.5,427.792 643.75,396.172 825,361.912"
        id="path00031" />
   <path
-       style="fill:none;stroke:#00aa00;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       style="fill:none;stroke:#00aa00;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;fill-opacity:1;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
        d="M 100,456.208 281.25,428.152 462.5,438.172 643.75,422.512 825,433.744"
        id="path00032" />
   <text

@@ -204,7 +204,7 @@ sub grid {
     my $y = 700 - ($v / $vmax * 600);
     push @elt, line(color  => (($v == 0) ? '#000000' : '#666666'),
                     width  => (($v == 0) ? 2 : 1),
-                    points => [[100, $y], [825, $y]])
+                    points => [[95, $y], [825, $y]])
       if not $arg{hidegrid};
     # And the labels:
     my $label = $arg{aspercent} ? ($v . '%') :
@@ -213,7 +213,7 @@ sub grid {
     push @elt, text(text  => $label,
                     size  => 10,
                     align => 'right',
-                    x     => 95,
+                    x     => 90,
                     y     => 2 + $y,
                    );
     $v += ($vmax > 7000000) ? 1000000 : ($vmax > 2500000) ? 500000 : ($vmax > 800000) ? 250000 :

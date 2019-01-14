@@ -127,81 +127,83 @@
          y="386.5">Slate</tspan></text>
   <!-- *** *** ***  E N D   L E G E N D  *** *** *** -->
 
+  <!--  *** *** ***  S T A R T   G R I D  *** *** ***  -->
   <path
-       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
-       d="M 100,700 825,700"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;fill-opacity:1;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="M 95,700 825,700"
        id="path00010" />
   <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:right;line-height:100%;writing-mode:lr-tb;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans Mono;-inkscape-font-specification:Bitstream Vera Sans Mono"
-       x="95"
+       x="90"
        y="702"
        id="text00011"
        sodipodi:linespacing="100%"><tspan
          sodipodi:role="line"
          id="tspan3594-3"
-         x="95"
+         x="90"
          y="702">0</tspan></text>
   <path
-       style="fill:none;stroke:#666666;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
-       d="M 100,580 825,580"
+       style="fill:none;stroke:#666666;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;fill-opacity:1;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="M 95,580 825,580"
        id="path00012" />
   <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:right;line-height:100%;writing-mode:lr-tb;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans Mono;-inkscape-font-specification:Bitstream Vera Sans Mono"
-       x="95"
+       x="90"
        y="582"
        id="text00013"
        sodipodi:linespacing="100%"><tspan
          sodipodi:role="line"
          id="tspan3594-3"
-         x="95"
+         x="90"
          y="582">10</tspan></text>
   <path
-       style="fill:none;stroke:#666666;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
-       d="M 100,460 825,460"
+       style="fill:none;stroke:#666666;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;fill-opacity:1;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="M 95,460 825,460"
        id="path00014" />
   <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:right;line-height:100%;writing-mode:lr-tb;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans Mono;-inkscape-font-specification:Bitstream Vera Sans Mono"
-       x="95"
+       x="90"
        y="462"
        id="text00015"
        sodipodi:linespacing="100%"><tspan
          sodipodi:role="line"
          id="tspan3594-3"
-         x="95"
+         x="90"
          y="462">20</tspan></text>
   <path
-       style="fill:none;stroke:#666666;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
-       d="M 100,340 825,340"
+       style="fill:none;stroke:#666666;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;fill-opacity:1;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="M 95,340 825,340"
        id="path00016" />
   <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:right;line-height:100%;writing-mode:lr-tb;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans Mono;-inkscape-font-specification:Bitstream Vera Sans Mono"
-       x="95"
+       x="90"
        y="342"
        id="text00017"
        sodipodi:linespacing="100%"><tspan
          sodipodi:role="line"
          id="tspan3594-3"
-         x="95"
+         x="90"
          y="342">30</tspan></text>
   <path
-       style="fill:none;stroke:#666666;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
-       d="M 100,220 825,220"
+       style="fill:none;stroke:#666666;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;fill-opacity:1;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="M 95,220 825,220"
        id="path00018" />
   <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:right;line-height:100%;writing-mode:lr-tb;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans Mono;-inkscape-font-specification:Bitstream Vera Sans Mono"
-       x="95"
+       x="90"
        y="222"
        id="text00019"
        sodipodi:linespacing="100%"><tspan
          sodipodi:role="line"
          id="tspan3594-3"
-         x="95"
+         x="90"
          y="222">40</tspan></text>
+  <!--  *** *** ***  *** VERTICAL ***  *** *** ***  -->
   <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:100%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans Mono;-inkscape-font-specification:Bitstream Vera Sans Mono"
@@ -268,6 +270,7 @@
          id="tspan3594-3"
          x="764.583333333333"
          y="715">Saturday</tspan></text>
+  <!--  *** *** ***    E N D   G R I D    *** *** ***  -->
   <rect
        style="color:#000000;fill:#9900bb;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.75;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
        id="rect00026"
