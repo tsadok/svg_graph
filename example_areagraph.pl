@@ -4,10 +4,11 @@
 do './svg_graph.pl';
 
 open SVG, ">", "example_areagraph.svg";
-print SVG svg(areagraph( title    => "Sample Area Graph",
-                         subtitle => 'https://github.com/tsadok/svg_graph.git',
-                         xlabels  => [ qw(Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec) ],
-                         data     => [
+print SVG svg(areagraph( title     => "Sample Area Graph",
+                         subtitle  => 'https://github.com/tsadok/svg_graph.git',
+                         aspercent => 1,
+                         xlabels   => [ qw(Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec) ],
+                         data      => [
                                       +{ name   => "Corn",
                                           values => [ 103, 108, 112, 119, 134, 148,
                                                       169, 185, 195, 169, 147, 120, ],

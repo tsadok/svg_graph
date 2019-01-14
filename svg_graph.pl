@@ -10,7 +10,7 @@ sub areagraph {
   my %arg = @_;
   my (@elt, @area);
   push @elt, backdrop(%arg);
-  my ($max, $hcnt) = get_maxima($arg{data}, stacked => 'yes', %arg);
+  my ($max, $hcnt, $totals) = get_maxima($arg{data}, stacked => 'yes', %arg);
   push @elt, $_ for legend('rect', %arg);
   push @elt, $_ for grid($max, $hcnt, $arg{data}, %arg);
   my @runningtotal;
@@ -19,14 +19,14 @@ sub areagraph {
     my @point = map {
       $runningtotal[$n] += $_;
       my $x = 100 + ($n / ($hcnt - 1) * 725);
-      my $y = 700 - ($runningtotal[$n] / $max * 600);
+      my $y = 700 - ($runningtotal[$n] / ($arg{aspercent} ? ($$totals[$n] * 124 / 100) : $max) * 600);
       $n++;
       [$x, $y]
     } @{$$d{values}};
-    unshift @area, line( color  => $$d{color},
-                         width  => 5,
-                         fill   => ($$d{fillcolor} || $$d{color}),
-                         points => [ [100, 700], @point, [825, 700] ] );
+    unshift @area, line( color   => $$d{color},
+                         width   => 5,
+                         fill    => ($$d{fillcolor} || $$d{color}),
+                         points  => [ [100, 700], @point, [825, 700] ] );
   }
   push @elt, $_ for @area;
   push @elt, title(%arg);
@@ -197,8 +197,9 @@ sub grid {
   my ($vmax, $hmax, $data, %arg) = @_;
   my @elt;
   $arg{graphtype} ||= 'linegraph'; # The default grid type.  Should also work for area graphs.
-  # Horizontal grid lines:
+  push @elt, qq[<!--  *** *** ***  S T A R T   G R I D  *** *** ***  -->];
   my $v = 0;
+  $vmax = 124 if $arg{aspercent};
   while ($v < $vmax) {
     my $y = 700 - ($v / $vmax * 600);
     push @elt, line(color  => (($v == 0) ? '#000000' : '#666666'),
@@ -206,7 +207,8 @@ sub grid {
                     points => [[100, $y], [825, $y]])
       if not $arg{hidegrid};
     # And the labels:
-    my $label = ($vmax > 5000000) ? (int($v / 1000000) . " M") :
+    my $label = $arg{aspercent} ? ($v . '%') :
+      ($vmax > 5000000) ? (int($v / 1000000) . " M") :
       ($vmax > 5000) ? (int($v / 1000) . " k") : $v;
     push @elt, text(text  => $label,
                     size  => 10,
@@ -220,11 +222,13 @@ sub grid {
       ($vmax > 3000) ? 1000 : ($vmax > 700) ? 250 : ($vmax > 300) ? 100 :
       ($vmax > 70) ? 25 : ($vmax > 30) ? 10 : ($vmax > 15) ? 5 : 1;
   }
+  push @elt, qq[<!--  *** *** ***  *** VERTICAL ***  *** *** ***  -->];
   # Vertical grid lines:
   $v = 0;
   while ($v < $hmax) {
     my $x = 100 + ($arg{xlabelpadding} || 0) + ($v / ($hmax - (($arg{graphtype} eq 'bargraph') ? 0 : 1)) * 725);
     my $top = ($arg{hideverticals} and ($v > 0)) ? 685 :
+      $arg{aspercent} ? 216 :
       $arg{subtitle} ? 160 : $arg{title} ? 135 : 100;
     push @elt, line( color  => (($v == 0) ? '#000000' : '#666666'),
                      width  => (($v == 0) ? 2 : 1),
@@ -240,6 +244,7 @@ sub grid {
     $v += ($hmax > 1000) ? 250 : ($hmax > 500) ? 100 : ($hmax > 150) ? 25 :
       ($hmax > 45) ? 10 : ($hmax > 18) ? 5 : 1;
   }
+  push @elt, qq[<!--  *** *** ***    E N D   G R I D    *** *** ***  -->];
   return @elt;
 }
 
@@ -413,12 +418,13 @@ sub polar_to_rectangular {
 sub line {
   my %arg = @_;
   my $num = $eltnum++;
-  $arg{color}   ||= '#7f7f7f';
-  $arg{width}   ||= 1;
-  $arg{opacity} ||= 1;
-  $arg{fill}    ||= 'none';
+  $arg{color}       ||= '#7f7f7f';
+  $arg{width}       ||= 1;
+  $arg{opacity}     ||= 1;
+  $arg{fill}        ||= 'none';
+  $arg{fillopacity} ||= $arg{opacity};
   return qq[<path
-       style="fill:$arg{fill};stroke:$arg{color};stroke-width:$arg{width};stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:$arg{opacity};stroke-miterlimit:4;stroke-dasharray:none"
+       style="fill:$arg{fill};stroke:$arg{color};stroke-width:$arg{width};stroke-linecap:butt;stroke-linejoin:miter;fill-opacity:$arg{fillopacity};stroke-opacity:$arg{opacity};stroke-miterlimit:4;stroke-dasharray:none"
        d="M ] . (join " ", map { $$_[0] . "," . $$_[1] } @{$arg{points}}) . qq["
        id="path$num" />]
 }
