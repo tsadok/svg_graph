@@ -18,7 +18,7 @@ sub areagraph {
     my $n = 0;
     my @point = map {
       $runningtotal[$n] += $_;
-      my $x = 100 + ($n / ($hcnt - 1) * 725);
+      my $x = 100 + ($n / ($hcnt - 1) * (825 - ($arg{legendwidth} || 100)));
       my $y = 700 - ($runningtotal[$n] / ($arg{aspercent} ? ($$totals[$n] * 124 / 100) : $max) * 600);
       $n++;
       [$x, $y]
@@ -26,7 +26,7 @@ sub areagraph {
     unshift @area, line( color   => $$d{color},
                          width   => 5,
                          fill    => ($$d{fillcolor} || $$d{color}),
-                         points  => [ [100, 700], @point, [825, 700] ] );
+                         points  => [ [100, 700], @point, [(925 - ($arg{legendwidth} || 100)), 700] ] );
   }
   push @elt, $_ for @area;
   push @elt, title(%arg);
@@ -39,14 +39,16 @@ sub linegraph {
   my @elt;
   push @elt, backdrop(%arg);
   my ($max, $hcnt) = get_maxima($arg{data}, %arg);
+  warn "Very low hcnt: $hcnt" if $hcnt < 2;
   push @elt, $_ for legend('line', %arg);
   push @elt, $_ for grid($max, $hcnt, $arg{data}, %arg);
   # Now the actual lines:
   for my $d (@{$arg{data}}) {
     my $n = 0;
+    $d  ||= 0;
     my @point = map {
       my $y = 700 - ($_ / $max * 600);
-      my $x = 100 + ($n / ($hcnt - 1) * 725);
+      my $x = 100 + ($n / ($hcnt - 1) * (825 - ($arg{legendwidth} || 100)));
       $n++;
       [$x, $y]
     } @{$$d{values}};
@@ -69,7 +71,7 @@ sub bargraph {
   my @elt;
   my ($max, $hcnt) = get_maxima($arg{data}, %arg);
   my $maxbars  = @{$arg{data}};
-  my $hwidth   = 725 / $hcnt;
+  my $hwidth   = (825 - ($arg{legendwidth} || 100)) / $hcnt;
   my $barspace = $hwidth / ($maxbars + 1);
   my $padding  = $barspace / 2;
   my $barpad   = $arg{barpadding} || 0;
@@ -204,7 +206,7 @@ sub grid {
     my $y = 700 - ($v / $vmax * 600);
     push @elt, line(color  => (($v == 0) ? '#000000' : '#666666'),
                     width  => (($v == 0) ? 2 : 1),
-                    points => [[95, $y], [825, $y]])
+                    points => [[95, $y], [925 - ($arg{legendwidth} || 100), $y]])
       if not $arg{hidegrid};
     # And the labels:
     my $label = $arg{aspercent} ? ($v . '%') :
@@ -226,7 +228,7 @@ sub grid {
   # Vertical grid lines:
   $v = 0;
   while ($v < $hmax) {
-    my $x = 100 + ($arg{xlabelpadding} || 0) + ($v / ($hmax - (($arg{graphtype} eq 'bargraph') ? 0 : 1)) * 725);
+    my $x = 100 + ($arg{xlabelpadding} || 0) + ($v / ($hmax - (($arg{graphtype} eq 'bargraph') ? 0 : 1)) * (825 - ($arg{legendwidth} || 100)));
     my $top = ($arg{hideverticals} and ($v > 0)) ? 685 :
       $arg{aspercent} ? 216 :
       $arg{subtitle} ? 160 : $arg{title} ? 135 : 100;
@@ -250,6 +252,7 @@ sub grid {
 
 sub legend {
   my ($legendtype, %arg) = @_;
+  $arg{legendwidth} ||= 100;
   my @elt = (qq[<!-- *** *** *** ***  L E G E N D  *** *** *** *** -->\n]);
   # Make sure all the data series have names, colors, legend positions:
   my @defaultcolor = default_colors();
@@ -264,30 +267,30 @@ sub legend {
     return (qq[<!-- no legend -->]);
   } else {
     my $lheight = 10 + (35 * (scalar @{$arg{data}}));
-    push @elt, rect( width       => 100,
+    push @elt, rect( width       => $arg{legendwidth},
                      height      => $lheight,
-                     x           => 850,
+                     x           => (950 - $arg{legendwidth}),
                      y           => (350 - $lheight / 2),
                      opacity     => $arg{legendopacity} || 0.75,
                      fillcolor   => ($arg{legendbackground} || '#eeeeee'),
-                     borderwidth => $arg{legendborderwidth} || 3,
+                     borderwidth => (defined $arg{legendborderwidth}) ? $arg{legendborderwidth} : 3,
                    );
     for my $d (@{$arg{data}}) {
       my $y = (350 - $lheight / 2) + 30 * $$d{__LEGEND_POS__};
       if ($legendtype eq 'line') {
         push @elt, line( color     => $$d{color},
                          width     => 3,
-                         points    => [[855, $y], [865, $y]],);
+                         points    => [[955 - $arg{legendwidth}, $y], [965 - $arg{legendwidth}, $y]],);
       } else {
         push @elt, rect( fillcolor   => $$d{color},
                          borderwidth => 1,
-                         x           => 857,
+                         x           => 957 - $arg{legendwidth},
                          y           => $y - 4,
                          width       => 8,
                          height      => 8,
                        );
       }
-      push @elt, text( x         => 870,
+      push @elt, text( x         => 970 - $arg{legendwidth},
                        y         => $y + 4,
                        text      => $$d{name});
     }
@@ -535,3 +538,5 @@ sub default_colors {
     '#ff028d', '#ad8150', '#c7fdb5', '#ffb07c', '#677a04', '#cb416b', '#8e82fe',
     '#53fca1', '#380282', '#ceb301', '#ffd1df', '#000000', '#555555',
 }
+
+42;
