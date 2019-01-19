@@ -159,7 +159,7 @@ sub get_stacked_maxima {
     }
     $vmax = $total[$n] if $vmax < $total[$n];
   }
-  $vmax = padmaximum($vmax);
+  $vmax = padmaximum($vmax, %arg);
   return ($vmax, $hmax, \@total);
 }
 
@@ -174,16 +174,17 @@ sub get_maxima {
     for my $v (@val) {
       $vmax = $v if $vmax < $v;
     }}
-  $vmax = padmaximum($vmax);
+  $vmax = padmaximum($vmax, %arg);
   # TODO: support logarithmic scale.
   return ($vmax, $hmax);
 }
 
 sub padmaximum {
-  my ($max) = @_;
+  my ($max, %arg) = @_;
   # We want to round the max up a bit, so none of the elements (lines,
   # bars, whatever) quite hit the top of the chart, and so the scale
   # looks reasonable.
+  return $max + $arg{padmaximum} if defined $arg{padmaximum};
   $max = int($max + 1.99999);
   while ($max % 5)   { $max++; }
   if ($max > 15 )    { while ($max % 25)     { $max += 5;      }}
@@ -252,7 +253,8 @@ sub grid {
 
 sub legend {
   my ($legendtype, %arg) = @_;
-  $arg{legendwidth} ||= 100;
+  $arg{legendwidth}      ||= 100;
+  $arg{legenditemheight} ||= 30;
   my @elt = (qq[<!-- *** *** *** ***  L E G E N D  *** *** *** *** -->\n]);
   # Make sure all the data series have names, colors, legend positions:
   my @defaultcolor = default_colors();
@@ -266,17 +268,17 @@ sub legend {
   if ($arg{hidelegend}) {
     return (qq[<!-- no legend -->]);
   } else {
-    my $lheight = 10 + (35 * (scalar @{$arg{data}}));
+    my $lheight = 15 + ($arg{legenditemheight} * (scalar @{$arg{data}}));
     push @elt, rect( width       => $arg{legendwidth},
                      height      => $lheight,
                      x           => (950 - $arg{legendwidth}),
-                     y           => (350 - $lheight / 2),
+                     y           => (365 - $lheight / 2),
                      opacity     => $arg{legendopacity} || 0.75,
                      fillcolor   => ($arg{legendbackground} || '#eeeeee'),
                      borderwidth => (defined $arg{legendborderwidth}) ? $arg{legendborderwidth} : 3,
                    );
     for my $d (@{$arg{data}}) {
-      my $y = (350 - $lheight / 2) + 30 * $$d{__LEGEND_POS__};
+      my $y = (365 - $lheight / 2) + $arg{legenditemheight} * $$d{__LEGEND_POS__};
       if ($legendtype eq 'line') {
         push @elt, line( color     => $$d{color},
                          width     => 3,

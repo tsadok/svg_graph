@@ -68,63 +68,63 @@
        style="color:#000000;fill:#eeeeee;fill-opacity:0.75;fill-rule:nonzero;stroke:#000000;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;stroke-opacity:0.75;stroke-miterlimit:4;stroke-dasharray:none"
        id="rect00003"
        width="100"
-       height="115"
+       height="105"
        x="850"
-       y="292.5" />
+       y="312.5" />
   <rect
        style="color:#000000;fill:#9900bb;fill-opacity:1.0;fill-rule:nonzero;stroke:#000000;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;stroke-opacity:1.0;stroke-miterlimit:4;stroke-dasharray:none"
        id="rect00004"
        width="8"
        height="8"
        x="857"
-       y="318.5" />
+       y="338.5" />
   <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:left;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans Mono;-inkscape-font-specification:Bitstream Vera Sans Mono"
        x="870"
-       y="326.5"
+       y="346.5"
        id="text00005"
        sodipodi:linespacing="100%"><tspan
          sodipodi:role="line"
          id="tspan3594-3"
          x="870"
-         y="326.5">Purple</tspan></text>
+         y="346.5">Purple</tspan></text>
   <rect
        style="color:#000000;fill:#e5b00f;fill-opacity:1.0;fill-rule:nonzero;stroke:#000000;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;stroke-opacity:1.0;stroke-miterlimit:4;stroke-dasharray:none"
        id="rect00006"
        width="8"
        height="8"
        x="857"
-       y="348.5" />
+       y="368.5" />
   <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:left;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans Mono;-inkscape-font-specification:Bitstream Vera Sans Mono"
        x="870"
-       y="356.5"
+       y="376.5"
        id="text00007"
        sodipodi:linespacing="100%"><tspan
          sodipodi:role="line"
          id="tspan3594-3"
          x="870"
-         y="356.5">Gold</tspan></text>
+         y="376.5">Gold</tspan></text>
   <rect
        style="color:#000000;fill:#3d736e;fill-opacity:1.0;fill-rule:nonzero;stroke:#000000;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;stroke-opacity:1.0;stroke-miterlimit:4;stroke-dasharray:none"
        id="rect00008"
        width="8"
        height="8"
        x="857"
-       y="378.5" />
+       y="398.5" />
   <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:left;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans Mono;-inkscape-font-specification:Bitstream Vera Sans Mono"
        x="870"
-       y="386.5"
+       y="406.5"
        id="text00009"
        sodipodi:linespacing="100%"><tspan
          sodipodi:role="line"
          id="tspan3594-3"
          x="870"
-         y="386.5">Slate</tspan></text>
+         y="406.5">Slate</tspan></text>
   <!-- *** *** ***  E N D   L E G E N D  *** *** *** -->
 
   <!--  *** *** ***  S T A R T   G R I D  *** *** ***  -->
