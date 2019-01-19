@@ -387,7 +387,7 @@ sub arc {
   $xstart += $arg{x}; $xend += $arg{x};
   # Y coords are inverted (because they start at the top of the screen in SVG):
   $ystart = $arg{y} - $ystart; $yend = $arg{y} - $yend;
-  my $largeflag  = (($arg{start} > $arg{end}) or (($arg{end} - $arg{start}) > (tau / 2))) ? 1 : 0;
+  my $largeflag  = ((($arg{start} > $arg{end}) and ($arg{end} != 0)) or (($arg{end} - $arg{start}) > (tau / 2))) ? 1 : 0;
   my $epsilon    = $arg{epsilon} || 0.0000001;
   my $fullcircle = ((abs($arg{start}) > $epsilon) or
                     (abs($arg{end} - tau) > $epsilon)) ? 0 : 1;
