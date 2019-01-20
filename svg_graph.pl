@@ -72,8 +72,8 @@ sub bargraph {
   my ($max, $hcnt) = get_maxima($arg{data}, %arg);
   my $maxbars  = @{$arg{data}};
   my $hwidth   = (825 - ($arg{legendwidth} || 100)) / $hcnt;
-  my $barspace = $hwidth / ($maxbars + 1);
-  my $padding  = $barspace / 2;
+  my $barspace = $arg{stacked} ? ($hwidth * 2 / 3) : ($hwidth / ($maxbars + 1));
+  my $padding  = $arg{stacked} ? 0 : $barspace / 2;
   my $barpad   = $arg{barpadding} || 0;
   my $barwidth = $barspace - (2 * $barpad);
   # Draw the preliminaries:
@@ -82,22 +82,24 @@ sub bargraph {
   push @elt, $_ for grid($max, $hcnt, $arg{data},
                          hideverticals => 'hide',
                          graphtype     => 'bargraph',
-                         xlabelpadding =>  $barspace * 2,
+                         xlabelpadding =>  ($arg{stacked} ? ($hwidth / 3) : $barspace * 2),
                          %arg);
   # Now draw the bars:
   if ($barwidth <= 0) { warn "Bar padding is too large ($barpad), discarding it.";
                         $barpad = 0; $barwidth = $barspace; }
   my $barnum = 0;
+  my @runningtotal;
   for my $d (@{$arg{data}}) {
     my $hnum = 0;
     for my $v (@{$$d{values}}) {
       my $hpos   = 100 + $hwidth * $hnum;
-      my $barpos = $hpos + $padding + ($barspace * $barnum);
+      my $barpos = $hpos + $padding + ($barspace * ($arg{stacked} ? 0 : $barnum));
       my $height = $v / $max * 600;
+      $runningtotal[$hnum] += $height;
       push @elt, rect( fillcolor     => $$d{color},
                        x             => $barpos + $barpad,
                        width         => $barwidth,
-                       y             => 700 - $height,
+                       y             => 700 - ($arg{stacked} ? $runningtotal[$hnum] : $height),
                        height        => $height,
                        borderwidth   => $arg{barborderwidth} || 0,
                        borderopacity => $arg{barborderopacity},
