@@ -51,7 +51,7 @@ sub linegraph {
       my $x = 100 + ($n / ($hcnt - 1) * (825 - ($arg{legendwidth} || 100)));
       $n++;
       [$x, $y]
-    } @{$$d{values}};
+    } grep { defined $_ } @{$$d{values}};
     push @elt, line( color  => $$d{color},
                      width  => 5,
                      points => \@point );
@@ -173,7 +173,7 @@ sub get_maxima {
   for my $d (@$data) {
     my @val = @{$$d{values}};
     $hmax = scalar @val if $hmax < scalar @val;
-    for my $v (@val) {
+    for my $v (grep { $_ } @val) {
       $vmax = $v if $vmax < $v;
     }}
   $vmax = padmaximum($vmax, %arg);
@@ -337,12 +337,13 @@ sub text {
   $arg{color}   ||= '#000000';
   $arg{opacity} ||= 1;
   $arg{font}    ||= 'Bitstream Vera Sans Mono';
+  $arg{magic}   ||= "";
   return qq[<text
        xml:space="preserve"
        style="font-size:$arg{size}px;font-style:$arg{style};font-variant:normal;font-weight:$arg{weight};font-stretch:normal;text-align:$arg{align};line-height:100%;writing-mode:lr-tb;text-anchor:$arg{anchor};fill:$arg{color};fill-opacity:$arg{opacity};stroke:none;font-family:$arg{font};-inkscape-font-specification:$arg{font}"
        x="$arg{x}"
        y="$arg{y}"
-       id="text$num"
+       id="text$num"$arg{magic}
        sodipodi:linespacing="100%"><tspan
          sodipodi:role="line"
          id="tspan3594-3"

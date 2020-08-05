@@ -45,10 +45,12 @@ Jonadab the Unsightly One perpetrated this mess.  Blame him.
 
 =head1 BUGS
 
-This code is in early development, so almost all the features are
-missing, and there are probably lots of bugs.  Fortunately, the source
-code is provided, so if you have problems you can probably figure them
-out and fix them on your own, assuming you are a Perl programmer.
+This code is limited in scope by design, so almost all the features
+are missing.  Also, there are probably lots of bugs.  Fortunately, the
+source code is provided, so if you have problems you can probably
+figure them out and fix them on your own, assuming you are a Perl
+programmer.  (If you just want to make SVG images without being a
+programmer, go download Inkscape.)
 
 Reporting discovered bugs to the author is encouraged.  The fastest
 way to reach me is on the Freenode IRC network, where I normally go
